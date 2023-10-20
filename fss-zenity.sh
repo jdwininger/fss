@@ -30,23 +30,22 @@ reboot_or_return() {
 }
 
 updates() {
-	echo ""
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf upgrade -y
 	reboot_or_return
 }
 
 uninstall() {
-	echo ""
 	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --auto-close --no-cancel &
+	sleep 1
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
+	sleep 1
 	mainmenu
 	return
 }
 
 flathub() {
 	zenity --progress --title="Installing Flathub applications" --pulsate --auto-close --no-cancel &
-	echo ""
 	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
 	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y 
@@ -82,56 +81,68 @@ flathub() {
 
 rpmfusion() {
 	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --pulsate --auto-close --no-cancel &
-	echo ""
+	echo "." ; sleep 1
 	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
+	echo ".." ; sleep 1
 	echo $sudo_password | sudo -S dnf groupupdate core -y 
+	echo "..." ; sleep 1
 	echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
+	echo "...." ; sleep 1
 	echo $sudo_password | sudo -S dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y 
+	echo "....." ; sleep 1
 	echo $sudo_password | sudo -S dnf groupupdate sound-and-video -y 
+	echo "......" ; sleep 1
 	echo $sudo_password | sudo -S dnf install rpmfusion-free-release-tainted -y 
+	echo "......." ; sleep 1
 	echo $sudo_password | sudo -S dnf install libdvdcss -y 
+	echo "........" ; sleep 1
 	echo $sudo_password | sudo -S dnf install steam wine winetricks gnome-tweaks kernel-modules-extra -y 
+	echo "........." ; sleep 1
 	echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y 
+	echo ".........." ; sleep 1
 	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome -y
-	echo $sudo_password | sudo -S dnf install google-chrome-stable -y 
+	echo "............" ; sleep 1
+	echo $sudo_password | sudo -S dnf install google-chrome-stable -y
+	killall -9 zenity
 	mainmenu
 }
 
 tweaks() {
 	zenity --progress --title="Configuring Gnome tweaks" --pulsate --auto-close --no-cancel &
-	echo ""
+	echo "" ; sleep 1
 	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
-	echo "."
+	echo "." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
-	echo ".."
+	echo ".." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
-	echo "..."
+	echo "..." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utility'
-	echo "...."
+	echo "...." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
-	echo "....."
+	echo "....." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
-	echo "......"
+	echo "......" ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate true
-	echo "......."
+	echo "......." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate true
-	echo "........"
+	echo "........" ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate true
-	echo "........."
+	echo "........." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate true
-	echo ".........."
+	echo ".........." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate true
-	echo "..........."
+	echo "..........." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
-	echo "............"
+	echo "............" ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
-	echo "............."
+	echo "............." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
-	echo ".............."
+	echo ".............." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
-	echo "..............."
+	echo "..............." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
-	echo "................"
+	echo "................" ; sleep 1
+	killall -9 zenity
 	mainmenu
 }
 
