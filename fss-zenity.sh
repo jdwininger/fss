@@ -2,9 +2,6 @@
 
 version="change version number here"
 
-## kill any previously running zenity process
-killall -9 zenity
-
 ## Welcome messsage
 zenity --info --title="Welcome to Jeremy's Fedora Setup Script '$version'" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
 
@@ -33,20 +30,21 @@ reboot_or_return() {
 }
 
 updates() {
+	clear
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --auto-close --no-cancel &
-	echo $sudo_password | sudo -S dnf upgrade -y 
-	killall -9 zenity
+	echo $sudo_password | sudo -S dnf upgrade -y
 	reboot_or_return
 }
 
 uninstall() {
+	clear
 	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
-	killall -9 zenity
 	mainmenu
 }
 
 flathub() {
+	clear
 	zenity --progress --title="Installing Flathub applications" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
 	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y 
@@ -78,11 +76,11 @@ flathub() {
 	echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y 
-	killall -9 zenity
 	mainmenu
 }
 
 rpmfusion() {
+	clear
 	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
 	echo $sudo_password | sudo -S dnf groupupdate core -y 
@@ -95,11 +93,11 @@ rpmfusion() {
 	echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y 
 	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome -y
 	echo $sudo_password | sudo -S dnf install google-chrome-stable -y 
-	killall -9 zenity
 	mainmenu
 }
 
 tweaks() {
+	clear
 	zenity --progress --title="Configuring Gnome tweaks" --pulsate --auto-close --no-cancel &
 	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
 	echo "."
@@ -133,12 +131,12 @@ tweaks() {
 	echo "..............."
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
 	echo "................"
-	killall -9 zenity
 	mainmenu
 }
 
 # Function to display menu using zenity
 mainmenu() {
+	clear
     zenity --forms \
         --title="Jeremy's Fedora Setup Script" \
         --text="Please select an option" \
