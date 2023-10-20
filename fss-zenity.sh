@@ -34,15 +34,13 @@ updates() {
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf upgrade -y
 	reboot_or_return
-	fi
 }
 
 uninstall() {
 	echo ""
 	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
-	mainmenu
-	fi
+	return mainmenu
 }
 
 flathub() {
@@ -79,7 +77,6 @@ flathub() {
 	echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y 
 	mainmenu
-	fi
 }
 
 rpmfusion() {
@@ -97,7 +94,6 @@ rpmfusion() {
 	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome -y
 	echo $sudo_password | sudo -S dnf install google-chrome-stable -y 
 	mainmenu
-	fi
 }
 
 tweaks() {
@@ -136,7 +132,6 @@ tweaks() {
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
 	echo "................"
 	mainmenu
-	fi
 }
 
 # Function to display menu using zenity
