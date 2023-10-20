@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="change version number here"
+version="0.000b"
 
 ## Welcome messsage
 zenity --info --title="Welcome to Jeremy's Fedora Setup Script '$version'" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
@@ -30,22 +30,22 @@ reboot_or_return() {
 }
 
 updates() {
-	clear
+	echo ""
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf upgrade -y
 	reboot_or_return
 }
 
 uninstall() {
-	clear
+	echo ""
 	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
 	mainmenu
 }
 
 flathub() {
-	clear
 	zenity --progress --title="Installing Flathub applications" --pulsate --auto-close --no-cancel &
+	echo ""
 	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
 	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y 
@@ -80,8 +80,8 @@ flathub() {
 }
 
 rpmfusion() {
-	clear
 	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --pulsate --auto-close --no-cancel &
+	echo ""
 	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
 	echo $sudo_password | sudo -S dnf groupupdate core -y 
 	echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
@@ -97,8 +97,8 @@ rpmfusion() {
 }
 
 tweaks() {
-	clear
 	zenity --progress --title="Configuring Gnome tweaks" --pulsate --auto-close --no-cancel &
+	echo ""
 	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
 	echo "."
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
