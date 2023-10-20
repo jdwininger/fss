@@ -30,21 +30,21 @@ reboot_or_return() {
 }
 
 updates() {
-	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --no-cancel &
+	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf upgrade -y 
 	killall -9 zenity
 	reboot_or_return
 }
 
 uninstall() {
-	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --no-cancel &
+	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
 	killall -9 zenity
 	mainmenu
 }
 
 flathub() {
-	zenity --progress --title="Installing Flathub applications" --pulsate --no-cancel &
+	zenity --progress --title="Installing Flathub applications" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
 	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y 
@@ -80,7 +80,7 @@ flathub() {
 }
 
 rpmfusion() {
-	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --pulsate --no-cancel &
+	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
 	echo $sudo_password | sudo -S dnf groupupdate core -y 
 	echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
@@ -97,7 +97,7 @@ rpmfusion() {
 }
 
 tweaks() {
-	zenity --progress --title="Configuring Gnome tweaks" --pulsate --no-cancel &
+	zenity --progress --title="Configuring Gnome tweaks" --pulsate --auto-close --no-cancel &
 	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
