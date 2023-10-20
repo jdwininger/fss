@@ -25,67 +25,67 @@ reboot_or_return() {
 
 updates() {
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --no-cancel &
-	echo $sudo_password | sudo -S dnf upgrade -y
+	echo $sudo_password | sudo -S dnf upgrade -y &&
 	killall -9 zenity
 	reboot_or_return
 }
 
 uninstall() {
 	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --no-cancel &
-	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y
+	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y &&
 	killall -9 zenity
 	mainmenu
 }
 
 flathub() {
 	zenity --pregress --title="Installing Flathub applications" --pulsate --no-cancel &
-	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref 
-	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.videolan.VLC -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.kde.krita -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.blender.Blender -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.github.libresprite.LibreSprite -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.orama_interactive.Pixelorama -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.tuxpaint.Tuxpaint -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.upscayl.Upscayl -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.atheme.audacious -y
-	echo $sudo_password | sudo -S flatpak install --system flathub net.retrodeck.retrodeck -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.ryujinx.Ryujinx -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.yuzu_emu.yuzu -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.obsproject.Studio -y
-	echo $sudo_password | sudo -S flatpak install --system flathub io.github.antimicrox.antimicrox -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.fightcade.Fightcade -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.mattjakeman.ExtensionManager -y
-	echo $sudo_password | sudo -S flatpak install --system flathub dev.gbstudio.gb-studio -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.mapeditor.Tiled -y
-	echo $sudo_password | sudo -S flatpak install --system flathub net.lutris.Lutris -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.heroicgameslauncher.hgl -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.github.tchx84.Flatseal -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.kde.kdenlive -y
-	echo $sudo_password | sudo -S flatpak install --system flathub fr.handbrake.ghb -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.jdownloader.JDownloader -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.github.Matoking.protontricks -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y
-	echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y
-	echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y
+	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.videolan.VLC -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.kde.krita -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.blender.Blender -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.github.libresprite.LibreSprite -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.orama_interactive.Pixelorama -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.tuxpaint.Tuxpaint -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.upscayl.Upscayl -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.atheme.audacious -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub net.retrodeck.retrodeck -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.ryujinx.Ryujinx -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.yuzu_emu.yuzu -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.obsproject.Studio -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub io.github.antimicrox.antimicrox -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.fightcade.Fightcade -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.mattjakeman.ExtensionManager -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub dev.gbstudio.gb-studio -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.mapeditor.Tiled -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub net.lutris.Lutris -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.heroicgameslauncher.hgl -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.github.tchx84.Flatseal -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.kde.kdenlive -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub fr.handbrake.ghb -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.jdownloader.JDownloader -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.github.Matoking.protontricks -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y &&
+	echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y &&
 	killall -9 zenity
 	mainmenu
 }
 
 rpmfusion() {
 	zenity -- progress --title="COnfiguring RPMfusion and installing Fedora packages" --pulsate --no-cancel &
-	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
-	echo $sudo_password | sudo -S dnf groupupdate core -y
-	echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y
-	echo $sudo_password | sudo -S dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
-	echo $sudo_password | sudo -S dnf groupupdate sound-and-video -y
-	echo $sudo_password | sudo -S dnf install rpmfusion-free-release-tainted -y
-	echo $sudo_password | sudo -S dnf install libdvdcss -y
-	echo $sudo_password | sudo -S dnf install steam wine winetricks gnome-tweaks kernel-modules-extra -y
-	echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y
+	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y &&
+	echo $sudo_password | sudo -S dnf groupupdate core -y &&
+	echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y &&
+	echo $sudo_password | sudo -S dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y &&
+	echo $sudo_password | sudo -S dnf groupupdate sound-and-video -y &&
+	echo $sudo_password | sudo -S dnf install rpmfusion-free-release-tainted -y &&
+	echo $sudo_password | sudo -S dnf install libdvdcss -y &&
+	echo $sudo_password | sudo -S dnf install steam wine winetricks gnome-tweaks kernel-modules-extra -y &&
+	echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y &&
 	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome 
-	echo $sudo_password | sudo -S dnf install google-chrome-stable -y
+	echo $sudo_password | sudo -S dnf install google-chrome-stable -y &&
 	killall -9 zenity
 	mainmenu
 }
