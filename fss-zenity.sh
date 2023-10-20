@@ -1,9 +1,9 @@
 #!/bin/bash
 
-version="0.000b"
+version="v0.000b"
 
 ## Welcome messsage
-zenity --info --title="Welcome to Jeremy's Fedora Setup Script '$version'" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
+zenity --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
 
 ## Ask for the sudo password
 sudo_password=""
@@ -34,6 +34,7 @@ updates() {
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf upgrade -y
 	reboot_or_return
+	fi
 }
 
 uninstall() {
@@ -41,6 +42,7 @@ uninstall() {
 	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
 	mainmenu
+	fi
 }
 
 flathub() {
@@ -77,6 +79,7 @@ flathub() {
 	echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y 
 	mainmenu
+	fi
 }
 
 rpmfusion() {
@@ -94,6 +97,7 @@ rpmfusion() {
 	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome -y
 	echo $sudo_password | sudo -S dnf install google-chrome-stable -y 
 	mainmenu
+	fi
 }
 
 tweaks() {
@@ -132,6 +136,7 @@ tweaks() {
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
 	echo "................"
 	mainmenu
+	fi
 }
 
 # Function to display menu using zenity
