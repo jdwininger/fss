@@ -143,8 +143,7 @@ mainmenu() {
         --title="Jeremy's Fedora Setup Script" \
         --text="Please select an option" \
         --add-combo="Option" \
-        --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Exit" \
-		--no-cancel
+        --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Exit"
 }
 
 # Function to perform actions based on menu selection
