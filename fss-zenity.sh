@@ -38,7 +38,7 @@ uninstall() {
 }
 
 flathub() {
-	zenity --pregress --title="Installing Flathub applications" --pulsate --no-cancel &
+	zenity --progress --title="Installing Flathub applications" --pulsate --no-cancel &
 	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref 
 	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y 
@@ -74,7 +74,7 @@ flathub() {
 }
 
 rpmfusion() {
-	zenity -- progress --title="COnfiguring RPMfusion and installing Fedora packages" --pulsate --no-cancel &
+	zenity --progress --title="COnfiguring RPMfusion and installing Fedora packages" --pulsate --no-cancel &
 	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
 	echo $sudo_password | sudo -S dnf groupupdate core -y 
 	echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
