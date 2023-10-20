@@ -1,23 +1,28 @@
 #!/bin/bash
-#[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
-# Ask for the sudo password
-sudo_password=$(zenity --password --title="Authentication Required")
+version="change version number here"
+
+## Welcome messsage
+zenity --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script $version.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
+
+## Ask for the sudo password
+password=$(zenity --password --title="Authentication Required")
+encrypted_password=$(openssl passwd -1 "$password")
 
 # Check if the user entered the sudo password
 if [ $? -eq 0 ]; then
     # Run the command with sudo
-    echo $sudo_password | sudo -S whoami
+    echo $(openssl passwd -1 "$encrypted_password") | sudo -S whoami
 else
     zenity --error --text="Authentication failed"
 fi
 
-echo $sudo_password | sudo -S dnf install zenity
+echo $(openssl passwd -1 "$encrypted_password") | sudo -S dnf install zenity
 
 reboot_or_return() {
-    zenity --question --title="Reboot System or Return to Main Menu" --text="Would you like to reboot your system now or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu"
+    zenity --question --title="Reboot System or Return to Main Menu" --text="Some updated packages, such as the Linux kernel, need a reboot to activate. If you decide to reboot you'll need to rerun this script and skip the update option. Would you like to reboot your system now or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu"
     if [ $? -eq 0 ]; then
-    	echo $sudo_password | sudo -S reboot
+    	echo $(openssl passwd -1 "$encrypted_password") | sudo -S reboot
     else
         mainmenu
     fi
@@ -25,7 +30,7 @@ reboot_or_return() {
 
 updates() {
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --no-cancel &
-	echo $sudo_password | sudo -S dnf upgrade -y 
+	echo $(openssl passwd -1 "$encrypted_password") | sudo -S dnf upgrade -y 
 	killall -9 zenity
 	reboot_or_return
 }
@@ -39,7 +44,7 @@ uninstall() {
 
 flathub() {
 	zenity --progress --title="Installing Flathub applications" --pulsate --no-cancel &
-	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref 
+	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
 	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub org.videolan.VLC -y 
@@ -74,7 +79,7 @@ flathub() {
 }
 
 rpmfusion() {
-	zenity --progress --title="COnfiguring RPMfusion and installing Fedora packages" --pulsate --no-cancel &
+	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --pulsate --no-cancel &
 	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
 	echo $sudo_password | sudo -S dnf groupupdate core -y 
 	echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
@@ -84,7 +89,7 @@ rpmfusion() {
 	echo $sudo_password | sudo -S dnf install libdvdcss -y 
 	echo $sudo_password | sudo -S dnf install steam wine winetricks gnome-tweaks kernel-modules-extra -y 
 	echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y 
-	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome 
+	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome -y
 	echo $sudo_password | sudo -S dnf install google-chrome-stable -y 
 	killall -9 zenity
 	mainmenu
@@ -115,7 +120,7 @@ tweaks() {
 # Function to display menu using zenity
 mainmenu() {
     zenity --forms \
-        --title="Jeremys Fedora Setup Script" \
+        --title="Jeremy's Fedora Setup Script" \
         --text="Please select an option" \
         --add-combo="Option" \
         --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Exit"
