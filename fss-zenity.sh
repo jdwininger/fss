@@ -23,25 +23,25 @@ reboot_or_return() {
     fi
 }
 
-show_progress() {
-    local task_name=$1
-    local total_steps=$2
-    local current_step=0
+# show_progress() {
+#     local task_name=$1
+#     local total_steps=$2
+#     local current_step=0
 
-    while true; do
-        # Update the progress bar
-        current_step=$((current_step + 1))
-        zenity --progress --title="Task Progress" --text="Processing $task_name..." --percentage=$(((current_step * 100) / total_steps))
+#     while true; do
+#         # Update the progress bar
+#         current_step=$((current_step + 1))
+#         zenity --progress --title="Task Progress" --text="Processing $task_name..." --percentage=$(((current_step * 100) / total_steps))
 
-        # Check if the task is completed
-        if [ $current_step -eq $total_steps ]; then
-            break
-        fi
+#         # Check if the task is completed
+#         if [ $current_step -eq $total_steps ]; then
+#             break
+#         fi
 
-        # Simulate a task by sleeping for a second
-        sleep 1
-    done
-}
+#         # Simulate a task by sleeping for a second
+#         sleep 1
+#     done
+# }
 
 quit() {
 	clear
@@ -49,8 +49,9 @@ quit() {
 }
 
 updates() {
-	show_progress "Updating Fedora - this might take awhile" 
-	echo $sudo_password | sudo -S dnf upgrade -y
+	command="echo $sudo_password | sudo -S dnf upgrade -y"
+	output=$( { $command ; } 2>&1 )
+	zenity --text-info --title="Updating your Fedoea system" --width=300 --height=200 --text="$output"
 	reboot_or_return
 }
 
@@ -147,28 +148,18 @@ mainmenu() {
 menu_actions() {
     case $1 in
         "Update this Fedora Install")
-			clear
-            echo "Update this Fedora Install"
 			updates
             ;;
         "Uninstall unwanted applications")
-			clear
-            echo "Uninstall unwanted applications"
 			uninstall			
             ;;
         "Setup RPMfusion and install Fedora applications|Install Flathub applications")
-			clear
-            echo "Setup RPMfusion and install Fedora applications|Install Flathub applications"
-            rpmfusion
+			rpmfusion
 			;;
 		"Install Flathub applications")
-			clear
-			echo "Install Flathub applications"
 			flathub
 			;;
 		"Set system tweaks")
-			clear
-			echo "Set system tweaks"
 			tweaks
 			;;
         "Exit")
