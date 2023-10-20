@@ -40,7 +40,8 @@ uninstall() {
 	echo ""
 	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --auto-close --no-cancel &
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
-	return mainmenu
+	mainmenu
+	return
 }
 
 flathub() {
