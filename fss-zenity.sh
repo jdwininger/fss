@@ -136,7 +136,6 @@ tweaks() {
 
 # Function to display menu using zenity
 mainmenu() {
-	clear
     zenity --forms \
         --title="Jeremy's Fedora Setup Script" \
         --text="Please select an option" \
