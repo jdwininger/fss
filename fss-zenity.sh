@@ -6,25 +6,24 @@ version="change version number here"
 zenity --info --title="Welcome to Jeremy's Fedora Setup Script '$version'" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
 
 ## Ask for the sudo password
-encrypted_password=""
-password=$(zenity --password --title="Authentication Required")
-encrypted_password=$(gpg -c password)
-decrypted_password=$(gpg -d $encrypted_password)
+sudo_password=""
+sudo_password=$(zenity --password --title="Authentication Required")
+
 
 # Check if the user entered the sudo password
 if [ $? -eq 0 ]; then
     # Run the command with sudo
-    echo $decrypted_password | sudo -S whoami
+    echo $sudo_password | sudo -S whoami
 else
     zenity --error --text="Authentication failed"
 fi
 
-echo $(openssl passwd -1 "$encrypted_password") | sudo -S dnf install zenity
+echo $password | sudo -S dnf install zenity
 
 reboot_or_return() {
     zenity --question --title="Reboot System or Return to Main Menu" --text="Some updated packages, such as the Linux kernel, need a reboot to activate. If you decide to reboot you'll need to rerun this script and skip the update option. Would you like to reboot your system now or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu"
     if [ $? -eq 0 ]; then
-    	echo $(openssl passwd -1 "$encrypted_password") | sudo -S reboot
+    	echo $sudo_password | sudo -S reboot
     else
         mainmenu
     fi
@@ -32,7 +31,7 @@ reboot_or_return() {
 
 updates() {
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --no-cancel &
-	echo $(openssl passwd -1 "$encrypted_password") | sudo -S dnf upgrade -y 
+	echo $sudo_password | sudo -S dnf upgrade -y 
 	killall -9 zenity
 	reboot_or_return
 }
