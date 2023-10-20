@@ -1,7 +1,18 @@
 #!/bin/bash
 #[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
-sudo dnf install zenity
+# Ask for the sudo password
+sudo_password=$(zenity --password --title="Authentication Required")
+
+# Check if the user entered the sudo password
+if [ $? -eq 0 ]; then
+    # Run the command with sudo
+    echo $sudo_password | sudo -S whoami
+else
+    zenity --error --text="Authentication failed"
+fi
+
+echo $sudo_password | sudo -S dnf install zenity
 
 show_progress() {
     local task_name=$1
@@ -38,6 +49,7 @@ updates() {
 }
 
 uninstall() {
+	show_progress "Uninstalling unwanted applications" 5
 	sudo dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y
 	clear
 	echo "Finished uninstalling unwanted Fedora applications."
@@ -137,7 +149,7 @@ show_menu() {
         --title="Jeremys Fedora Setup Script" \
         --text="Please select an option" \
         --add-combo="Option" \
-        --combo-values="Update this Fedora Install|uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|set system tweaks|Exit"
+        --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Exit"
 }
 
 # Function to perform actions based on menu selection
@@ -149,7 +161,9 @@ menu_actions() {
 			updates
             ;;
         "Option 2")
-            echo "You selected Option 2"
+			clear
+            echo "Uninstall unwanted applications"
+			uninstall			
             ;;
         "Option 3")
             echo "You selected Option 3"
