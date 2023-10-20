@@ -23,47 +23,24 @@ reboot_or_return() {
     fi
 }
 
-# show_progress() {
-#     local task_name=$1
-#     local total_steps=$2
-#     local current_step=0
-
-#     while true; do
-#         # Update the progress bar
-#         current_step=$((current_step + 1))
-#         zenity --progress --title="Task Progress" --text="Processing $task_name..." --percentage=$(((current_step * 100) / total_steps))
-
-#         # Check if the task is completed
-#         if [ $current_step -eq $total_steps ]; then
-#             break
-#         fi
-
-#         # Simulate a task by sleeping for a second
-#         sleep 1
-#     done
-# }
-
-quit() {
-	clear
-	exit
-}
-
 updates() {
 	command="echo $sudo_password | sudo -S dnf upgrade -y"
-	output=$( { $command ; } 2>&1 )
-	zenity --text-info --title="Updating your Fedoea system" --width=300 --height=200 --text="$output"
+	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --no-cancel &
+	eval $command
+	killall -9 zenity
 	reboot_or_return
 }
 
 uninstall() {
-	show_progress "Uninstalling unwanted applications" 5
-	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y
-	zenity --info --text="Finished uninstalling unwanted applications" --ok-label="Return to Main Menu"
+	command="echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y"
+	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --no-cancel &
+	eval $command
+	killall -9 zenity
 	mainmenu
 }
 
 flathub() {
-	show_progress "Install Flathub applications - This takes a while" 30
+	zenity --pregress --title="Installing Flathub applications" --pulsate --no-cancel &
 	echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref 
 	echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y
 	echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y
@@ -94,11 +71,12 @@ flathub() {
 	echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y
 	echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y
 	echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y
-	zenity --info --text="Finished installing Flathub applications" --ok-label="Return to Main Menu"
+	killall -9 zenity
 	mainmenu
 }
 
 rpmfusion() {
+	zenity -- progress --title="COnfiguring RPMfusion and installing Fedora packages" --pulsate --no-cancel &
 	echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 	echo $sudo_password | sudo -S dnf groupupdate core -y
 	echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y
@@ -110,11 +88,12 @@ rpmfusion() {
 	echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y
 	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome 
 	echo $sudo_password | sudo -S dnf install google-chrome-stable -y
-	zenity --info --text="Finshed installing Fedora packages" --ok-label="Return to Main Menu"
+	killall -9 zenity
 	mainmenu
 }
 
 tweaks() {
+	zenity --progress --title="Configuring Gnome tweaks" --pulsate --no-cancel &
 	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
@@ -131,7 +110,7 @@ tweaks() {
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
-	zenity --info --text="Finished setting Gnome tweaks" --ok-label="Return to Main Menu"
+	killall -9 zenity
 	mainmenu
 }
 
@@ -179,40 +158,5 @@ while true; do
     # Perform actions based on user selection
     menu_actions "$selected_option"
 done
-
-
-# mainmenu() {
-#   clear
-#   echo "Press 1 to update your system"
-#   echo "Press 2 to uninstall unused applications"
-#   echo "Press 3 to Setup RPMfusion and install Fedora applications"
-#   echo "Press 4 to Install Flathub applications"
-#   echo "Press 5 to set system tweaks"
-#   echo "Press x to exit the script"
-#   read -n 1 -p "Input Selection:" mainmenuinput
-#   if [ "$mainmenuinput" = "1" ]; then
-#             updates
-#         elif [ "$mainmenuinput" = "2" ]; then
-#             uninstall
-#         elif [ "$mainmenuinput" = "4" ]; then
-#             flathub
-#         elif [ "$mainmenuinput" = "3" ]; then
-#             rpmfusion
-#         elif [ "$mainmenuinput" = "5" ]; then
-#             tweaks
-#         elif [ "$mainmenuinput" = "x" ];then
-#             quit
-#         elif [ "$mainmenuinput" = "X" ];then
-#             quit
-#         else
-#             echo "You have entered an invalid selection!"
-#             echo "Please try again."
-#             echo ""
-#             read -n 1 -s -p 'Press any key to continue.'
-#             echo ""
-#             clear
-#             mainmenu
-#         fi
-# }
 
 mainmenu
