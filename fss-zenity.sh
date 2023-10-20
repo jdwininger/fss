@@ -15,9 +15,9 @@ fi
 echo $sudo_password | sudo -S dnf install zenity
 
 reboot_or_return() {
-    zenity --question --title="Reboot or Return to Main Menu" --text="Would you like to reboot or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu"
+    zenity --question --title="Reboot System or Return to Main Menu" --text="Would you like to reboot your system now or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu"
     if [ $? -eq 0 ]; then
-        sudo reboot
+    	echo $sudo_password | sudo -S reboot
     else
         mainmenu
     fi
@@ -49,10 +49,7 @@ quit() {
 }
 
 updates() {
-	show_progress "Updating Fedora" 5
-	echo "Now updating your Fedora install. You will be asked for your password to continue. When this finishes your computer will reboot, so make sure all your work is saved. When your computer reboots run this script again."
-	echo ""
-	read -n 1 -s -p 'Press any key to continue.'
+	show_progress "Updating Fedora - this might take awhile" 
 	echo $sudo_password | sudo -S dnf upgrade -y
 	reboot_or_return
 }
