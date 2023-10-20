@@ -136,7 +136,7 @@ menu_actions() {
         "Uninstall unwanted applications")
 			uninstall			
             ;;
-        "Setup RPMfusion and install Fedora applications|Install Flathub applications")
+        "Setup RPMfusion and install Fedora applications")
 			rpmfusion
 			;;
 		"Install Flathub applications")
