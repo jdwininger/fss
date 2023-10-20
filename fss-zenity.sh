@@ -6,13 +6,15 @@ version="change version number here"
 zenity --info --title="Welcome to Jeremy's Fedora Setup Script '$version'" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
 
 ## Ask for the sudo password
+encrypted_password=""
 password=$(zenity --password --title="Authentication Required")
-encrypted_password=$(openssl passwd -1 "$password")
+encrypted_password=$(gpg -c password)
+decrypted_password=$(gpg -d $encrypted_password)
 
 # Check if the user entered the sudo password
 if [ $? -eq 0 ]; then
     # Run the command with sudo
-    echo $(openssl passwd -1 "$encrypted_password") | sudo -S whoami
+    echo $decrypted_password | sudo -S whoami
 else
     zenity --error --text="Authentication failed"
 fi
