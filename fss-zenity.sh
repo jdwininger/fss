@@ -24,17 +24,15 @@ reboot_or_return() {
 }
 
 updates() {
-	command="echo $sudo_password | sudo -S dnf upgrade -y"
 	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --no-cancel &
-	eval $command
+	echo $sudo_password | sudo -S dnf upgrade -y
 	killall -9 zenity
 	reboot_or_return
 }
 
 uninstall() {
-	command="echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y"
 	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --no-cancel &
-	eval $command
+	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y
 	killall -9 zenity
 	mainmenu
 }
