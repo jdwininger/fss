@@ -56,9 +56,7 @@ updates() {
 
 uninstall() {
 	show_progress "Uninstalling unwanted applications" 5
-	sudo dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y
-	clear
-	echo "Finished uninstalling unwanted Fedora applications."
+	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y
 	zenity --info --text="Finished uninstalling unwanted applications" --ok-label="Return to Main Menu"
 	mainmenu
 }
