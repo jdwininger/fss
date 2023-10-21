@@ -40,8 +40,8 @@ uninstall() {
 	sleep 1
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
 	sleep 1
+	close_zenity
 	mainmenu
-	return
 }
 
 flathub() {
@@ -76,6 +76,7 @@ flathub() {
 	echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y 
+	close_zenity
 	mainmenu
 }
 
@@ -103,7 +104,8 @@ rpmfusion() {
 	echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome -y
 	echo "............" ; sleep 1
 	echo $sudo_password | sudo -S dnf install google-chrome-stable -y
-	killall -9 zenity
+	sleep 1
+	close_zenity
 	mainmenu
 }
 
@@ -142,7 +144,7 @@ tweaks() {
 	echo "..............." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
 	echo "................" ; sleep 1
-	killall -9 zenity
+	close_zenity
 	mainmenu
 }
 
@@ -155,7 +157,18 @@ mainmenu() {
         --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Exit"
 }
 
-# Function to perform actions based on menu selection
+## function to close zenity window
+close_zenity() {
+  # Get the process ID of the Zenity dialog
+  zenity_pid=$(pgrep -f "zenity")
+
+  # If the dialog is running, kill it
+  if [[ -n "$zenity_pid" ]]; then
+    kill -9 "$zenity_pid"
+  fi
+}
+
+## Function to perform actions based on menu selection
 menu_actions() {
     case $1 in
         "Update this Fedora Install")
@@ -182,7 +195,7 @@ menu_actions() {
     esac
 }
 
-# Main loop
+## Main loop
 while true; do
     # Display menu and get user selection
     selected_option=$(mainmenu)
