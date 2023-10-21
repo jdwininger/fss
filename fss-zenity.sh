@@ -186,14 +186,14 @@ mainmenu() {
 
 ## Function to perform actions based on menu selection
 menu_actions() {
-    case $1 in
-        "Update this Fedora Install")
+	case $1 in
+		"Update this Fedora Install")
 			updates
-            ;;
-        "Uninstall unwanted applications")
+			;;
+		"Uninstall unwanted applications")
 			uninstall			
-            ;;
-        "Setup RPMfusion and install Fedora applications")
+			;;
+		"Setup RPMfusion and install Fedora applications")
 			rpmfusion
 			;;
 		"Install Flathub applications")
@@ -202,12 +202,12 @@ menu_actions() {
 		"Set system tweaks")
 			tweaks
 			;;
-        "Exit")
-            exit 0
-            ;;
-        *)
-            echo "Invalid option"
-            ;;
+		"Exit")
+			exit 0
+			;;
+		*)
+			echo "Invalid option"
+			;;
     esac
 }
 
