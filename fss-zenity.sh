@@ -40,7 +40,7 @@ uninstall() {
 	sleep 1
 	echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
 	sleep 1
-	close_zenity
+#	close_zenity
 	mainmenu
 }
 
@@ -76,7 +76,7 @@ flathub() {
 	echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y 
 	echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y 
-	close_zenity
+#	close_zenity
 	mainmenu
 }
 
@@ -105,7 +105,7 @@ rpmfusion() {
 	echo "............" ; sleep 1
 	echo $sudo_password | sudo -S dnf install google-chrome-stable -y
 	sleep 1
-	close_zenity
+#	close_zenity
 	mainmenu
 }
 
@@ -144,7 +144,7 @@ tweaks() {
 	echo "..............." ; sleep 1
 	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
 	echo "................" ; sleep 1
-	close_zenity
+#	close_zenity
 	mainmenu
 }
 
