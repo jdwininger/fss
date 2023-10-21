@@ -41,7 +41,7 @@ updates() {
 	reboot_or_return
 }
 
-## Function to remove unused software from the system
+## Function to remove unwanted software from the system
 uninstall() {
 	(
 		sleep 1
