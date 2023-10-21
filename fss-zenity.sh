@@ -30,8 +30,10 @@ reboot_or_return() {
 }
 
 updates() {
-	zenity --progress --title="Updating your Fedora system" --width=640 --height=480 --pulsate --auto-close --no-cancel &
+	zenity --progress --title="Updating your Fedora system" --pulsate --auto-close --no-cancel &
+	sleep 1
 	echo $sudo_password | sudo -S dnf upgrade -y
+	sleep 1
 	reboot_or_return
 }
 
