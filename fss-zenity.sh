@@ -2,6 +2,11 @@
 
 version="v0.000b"
 
+# establish some variables for nvidia driver installation
+FILE="~/.bash_profile"
+SEARCH_TEXT="export GDK_GL=gles"
+ADDITIONAL_TEXT="export GDK_GL=gles"
+
 ## Welcome messsage
 zenity --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
 
@@ -222,13 +227,15 @@ tweaks() {
 nvida() {
 	(
 		echo "" ; sleep 1
-		echo $sudo_password | dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
+		echo $sudo_password | sudo -S dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
 		echo ".." ; sleep 1
-		echo $sudo_password | grubby --update-kernel=ALL --args='video=vesafb:mtrr:3'
+		echo $sudo_password | sudo -S grubby --update-kernel=ALL --args='video=vesafb:mtrr:3'
 		echo "..." ; sleep 1
-		echo $sudo_password | dnf install libva-nvidia-driver.{i686,x86_64} -y
+		echo $sudo_password | sudo -S dnf install libva-nvidia-driver.{i686,x86_64} -y
 		echo "...." ; sleep 1
-		echo $sudo_password | "export GDK_GL=gles" >> ~/.bash_profile
+		if ! grep -q "$SEARCH_TEXT" "$FILE"; then
+  			echo "$ADDITIONAL_TEXT" >> "$FILE"
+		fi
 		echo "....." ; sleep 1
 		) |
 	zenity --progress --title="Installing Nvidia Drivers" --pulsate --auto-close --no-cancel
@@ -239,17 +246,17 @@ nvida() {
 amd() {
 	(
 		echo "" ; sleep 1
-		echo $sudo_password | sudo dnf install mesa-vulkan-drivers vulkan mesa-libGL mesa-libEGL -y
+		echo $sudo_password | sudo -S dnf install mesa-vulkan-drivers vulkan mesa-libGL mesa-libEGL -y
 		echo ".." ; sleep 1
-		echo $sudo_password | sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
+		echo $sudo_password | sudo -S dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
 		echo "..." ; sleep 1
-		echo $sudo_password | sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
+		echo $sudo_password | sudo -S dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
 		echo "...." ; sleep 1
-		echo $sudo_password | sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
+		echo $sudo_password | sudo -S dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
 		echo "....." ; sleep 1
-		echo $sudo_password | sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
+		echo $sudo_password | sudo -S dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
 		echo "......" ; sleep 1
-		echo $sudo_password | sudo dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip 
+		echo $sudo_password | sudo -S dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip 
 	) |
 	zenity --progress --title="Installing AMD Drivers" --pulsate --auto-close --no-cancel
 	return

@@ -1,6 +1,11 @@
 #!/bin/bash
 [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
+# establish some variables
+FILE="~/.bash_profile"
+SEARCH_TEXT="export GDK_GL=gles"
+ADDITIONAL_TEXT="export GDK_GL=gles"
+
 quit() {
 	clear
 	exit
@@ -143,8 +148,10 @@ nvidia()  {
 	echo "Make sure you have ran menu option 1 before installing these Nvidia drivers."
 	sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
 	sudo grubby --update-kernel=ALL --args='video=vesafb:mtrr:3'
-	sudo dnf install libva-nvidia-driver.{i686,x86_64}
-	echo "export GDK_GL=gles" >> ~/.bash_profile
+	sudo dnf install libva-nvidia-driver.{i686,x86_64} -y
+	if ! grep -q "$SEARCH_TEXT" "$FILE"; then
+  		echo "$ADDITIONAL_TEXT" >> "$FILE"
+	fi
 	echo "Finished RPMFusion Nvidia drivers."
         echo ""
         read -n 1 -s -p 'Press any key to return to the main menu'
@@ -155,11 +162,11 @@ nvidia()  {
 amd()  {
 	clear
 	echo ""
-	sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
-	sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
-	sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-	sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
-	sudo dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip 
+	sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
+	sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
+	sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
+	sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
+	sudo dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip -y
         echo "Finished setting up AMD GPU."
         echo ""
         read -n 1 -s -p 'Press any key to return to the main menu'
@@ -170,8 +177,8 @@ amd()  {
 intel()  {
         clear
         echo ""
-	sudo dnf install xorg-x11-drv-intel
-	sudo dnf install intel-media-driver
+	sudo dnf install xorg-x11-drv-intel -y
+	sudo dnf install intel-media-driver -y
         echo "Finished setting up Intel GPU."
         echo ""
         read -n 1 -s -p 'Press any key to return to the main menu'
