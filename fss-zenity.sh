@@ -55,50 +55,85 @@ uninstall() {
 ## Function to install flatpak applications from Flathub
 flathub() {
 	(
-		echo "."
+		echo "." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
-		echo ".."
+		echo ".." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y 
-		echo "..."
+		echo "..." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y 
-		echo "...."
+		echo "...." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.videolan.VLC -y 
-		echo "....."
+		echo "....." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.kde.krita -y 
-		echo "......"
+		echo "......" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.blender.Blender -y 
-		echo "......."
+		echo "......." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.github.libresprite.LibreSprite -y 
-		echo "........"
+		echo "........" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.orama_interactive.Pixelorama -y 
-		echo "........."
+		echo "........." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.tuxpaint.Tuxpaint -y 
-		echo ".........."
+		echo ".........." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.upscayl.Upscayl -y 
-		echo "..........."
+		echo "..........." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.atheme.audacious -y 
-		echo "............"
+		echo "............" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub net.retrodeck.retrodeck -y 
-		echo "............."
+		echo "............." ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.ryujinx.Ryujinx -y 
-		echo ".............. 14"
-		echo $sudo_password | sudo -S flatpak install --system flathub org.yuzu_emu.yuzu -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub com.obsproject.Studio -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub io.github.antimicrox.antimicrox -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub com.fightcade.Fightcade -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub com.mattjakeman.ExtensionManager -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub dev.gbstudio.gb-studio -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub org.mapeditor.Tiled -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub net.lutris.Lutris -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub com.heroicgameslauncher.hgl -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub com.github.tchx84.Flatseal -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub org.kde.kdenlive -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub fr.handbrake.ghb -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub org.jdownloader.JDownloader -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub com.github.Matoking.protontricks -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y 
-		echo $sudo_password | sudo -S flatpak install --system flathub org.gnome.FileRoller -y 
+		echo ".............." ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub org.yuzu_emu.yuzu -y
+		echo "..............."  ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub com.obsproject.Studio -y
+		echo "................" ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub io.github.antimicrox.antimicrox -y
+		echo "................." ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub com.fightcade.Fightcade -y
+		echo ".................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub com.mattjakeman.ExtensionManager -y
+		echo "..................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub dev.gbstudio.gb-studio -y
+		echo "...................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub org.mapeditor.Tiled -y
+		echo "....................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub net.lutris.Lutris -y
+		echo "......................" ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub com.heroicgameslauncher.hgl -y
+		echo "......................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub com.github.tchx84.Flatseal -y
+		echo "........................" ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub org.kde.kdenlive -y
+		echo "........................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub fr.handbrake.ghb -y
+		echo ".........................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub org.jdownloader.JDownloader -y
+		echo "..........................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub com.github.Matoking.protontricks -y
+		echo "............................" ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y
+		echo "............................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y
+		echo ".............................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub app.xemu.xemu -y
+		echo "..............................." ; sleep 1 
+		echo $sudo_password | sudo -S flatpak install --system flathub net.pcsx2.PCSX2 -y
+		echo "................................" ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub net.kuribo64.melonDS -y
+		echo "................................." ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub io.github.lime3ds.Lime3DS -y
+		echo ".................................." ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub com.retrodev.blastem -y
+		echo "..................................." ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub org.flycast.Flycast -y
+		echo "...................................." ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub org.libretro.RetroArch -y
+		echo "....................................." ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub info.cemu.Cemu -y
+		echo "......................................" ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub net.rpcs3.RPCS3 -y
+		echo "......................................." ; sleep 1
+		echo $sudo_password |
+		sleep 1
 	) | 
 		zenity --progress --title="Installing Flathub applications" --pulsate --auto-close --no-cancel
 	return
@@ -110,13 +145,13 @@ rpmfusion() {
 		echo "." ; sleep 1
 		echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
 		echo ".." ; sleep 1
-		echo $sudo_password | sudo -S dnf groupupdate core -y 
+		echo $sudo_password | sudo -S dnf groupupdate @core -y
 		echo "..." ; sleep 1
-		echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
+		echo $sudo_password | sudo -S dnf config-manager setopt fedora-cisco-openh264.enabled=1
 		echo "...." ; sleep 1
-		echo $sudo_password | sudo -S dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y 
+		echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
 		echo "....." ; sleep 1
-		echo $sudo_password | sudo -S dnf groupupdate sound-and-video -y 
+		echo $sudo_password | sudo -S dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y 
 		echo "......" ; sleep 1
 		echo $sudo_password | sudo -S dnf install rpmfusion-free-release-tainted -y 
 		echo "......." ; sleep 1
@@ -126,10 +161,18 @@ rpmfusion() {
 		echo "........." ; sleep 1
 		echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y 
 		echo ".........." ; sleep 1
-		echo $sudo_password | sudo -S dnf config-manager --set-enabled google-chrome -y
 		echo "............" ; sleep 1
-		echo $sudo_password | sudo -S dnf install google-chrome-stable -y
-		sleep 1
+		echo "............." ; sleep 1
+		echo $sudo_password | sudo -S dnf install @development-tools -y
+		echo ".............." ; sleep 1
+		echo $sudo_password | sudo -S dnf install make gcc-cpp -y
+		echo "..............." ; sleep 1
+		echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y
+		echo "................" ; sleep 1
+		echo $sudo_password | sudo -S rpm --import https://packages.microsoft.com/keys/microsoft.asc -y
+		echo $sudo_password | sudo -S echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+		echo $sudo_password | sudo -S dnf install code -y
+		echo "................." ; sleep 1
 	) | 
 		zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --pulsate --auto-close --no-cancel
 	return
@@ -175,13 +218,30 @@ tweaks() {
 	return
 }
 
+# Install Nvidia Drivers from RPMFusion
+nvida() {
+	(
+		echo "" ; sleep 1
+		echo $sudo_password | dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
+		echo ".." ; sleep 1
+		echo $sudo_password | grubby --update-kernel=ALL --args='video=vesafb:mtrr:3'
+		echo "..." ; sleep 1
+		echo $sudo_password | dnf install libva-nvidia-driver.{i686,x86_64} -y
+		echo "...." ; sleep 1
+		echo $sudo_password | "export GDK_GL=gles" >> ~/.bash_profile
+		echo "....." ; sleep 1
+		) |
+	zenity --progress --title="Installing Nvidia Drivers" --pulsate --auto-close --no-cancel
+	return
+}
+
 # Function to display menu using zenity
 mainmenu() {
     zenity --forms \
         --title="Jeremy's Fedora Setup Script" \
         --text="Please select an option" \
         --add-combo="Option" \
-        --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Exit"
+        --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Install Nvidia Drivers|Install AMD Drivers|Install Intel Drivers|Exit"
 }
 
 ## Function to perform actions based on menu selection
@@ -202,6 +262,15 @@ menu_actions() {
 		"Set system tweaks")
 			tweaks
 			;;
+		"Install Nvidia drivers")
+			nvidia
+			;;
+		"Install AMD drivers")
+			amd
+			;;
+		"Install Intel drivers")
+			intel
+			;;			
 		"Exit")
 			exit 0
 			;;
