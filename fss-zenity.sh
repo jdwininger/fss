@@ -235,6 +235,27 @@ nvida() {
 	return
 }
 
+# Install AMD Drivers
+amd() {
+	(
+		echo "" ; sleep 1
+		echo $sudo_password | sudo dnf install mesa-vulkan-drivers vulkan mesa-libGL mesa-libEGL -y
+		echo ".." ; sleep 1
+		echo $sudo_password | sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
+		echo "..." ; sleep 1
+		echo $sudo_password | sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
+		echo "...." ; sleep 1
+		echo $sudo_password | sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
+		echo "....." ; sleep 1
+		echo $sudo_password | sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
+		echo "......" ; sleep 1
+		echo $sudo_password | sudo dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip 
+	) |
+	zenity --progress --title="Installing AMD Drivers" --pulsate --auto-close --no-cancel
+	return
+}
+
+
 # Function to display menu using zenity
 mainmenu() {
     zenity --forms \
