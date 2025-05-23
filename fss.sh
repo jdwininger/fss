@@ -212,7 +212,7 @@ mainmenu() {
             amd
         elif [ "$mainmenuinput" = "A" ]; then
             amd
-	elif [ "$mainmenuinput" = "i" ]; then
+		elif [ "$mainmenuinput" = "i" ]; then
             intel
         elif [ "$mainmenuinput" = "I" ]; then
             intel

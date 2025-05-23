@@ -8,7 +8,7 @@ SEARCH_TEXT="export GDK_GL=gles"
 ADDITIONAL_TEXT="export GDK_GL=gles"
 
 ## Welcome messsage
-zenity --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
+zenity  --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
 
 ## Ask for the sudo password
 sudo_password=""
@@ -19,7 +19,7 @@ if [ $? -eq 0 ]; then
     # Run the command with sudo
     echo $sudo_password | sudo -S whoami
 else
-    zenity --error --text="Authentication failed"
+    zenity  --error --text="Authentication failed"
 fi
 
 ## Install zenity if it's not already
@@ -27,7 +27,7 @@ echo $password | sudo -S dnf install zenity
 
 ## function to reboot the system or return to the main menu
 reboot_or_return() {
-    zenity --question --title="Reboot System or Return to Main Menu" --text="Some updated packages, such as the Linux kernel, need a reboot to activate. If you decide to reboot you'll need to rerun this script and skip the update option. Would you like to reboot your system now or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu"
+    zenity  --question --title="Reboot System or Return to Main Menu" --text="Some updated packages, such as the Linux kernel, need a reboot to activate. If you decide to reboot you'll need to rerun this script and skip the update option. Would you like to reboot your system now or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu"
     if [ $? -eq 0 ]; then
     	echo $sudo_password | sudo -S reboot
     else
@@ -42,7 +42,7 @@ updates() {
 		echo $sudo_password | sudo -S dnf upgrade -y
 		sleep 1
 	) | 
-	zenity --progress --title="Updating your Fedora system" --pulsate --auto-close --no-cancel	
+	zenity  --progress --title="Updating your Fedora system"  --pulsate --auto-close --no-cancel	
 	reboot_or_return
 }
 
@@ -53,7 +53,7 @@ uninstall() {
 		echo $sudo_password | sudo -S dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y 
 		sleep 1
 	) | 
-	zenity --progress --title="Uninstalling unwanted Fedora packages" --pulsate --auto-close --no-cancel
+	zenity  --progress --title="Uninstalling unwanted Fedora packages"  --pulsate --auto-close --no-cancel
 	return
 }
 
@@ -140,7 +140,7 @@ flathub() {
 		echo $sudo_password |
 		sleep 1
 	) | 
-		zenity --progress --title="Installing Flathub applications" --pulsate --auto-close --no-cancel
+		zenity  --progress --title="Installing Flathub applications"  --pulsate --auto-close --no-cancel
 	return
 }
 
@@ -179,7 +179,7 @@ rpmfusion() {
 		echo $sudo_password | sudo -S dnf install code -y
 		echo "................." ; sleep 1
 	) | 
-		zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --pulsate --auto-close --no-cancel
+		zenity  --progress --title="Configuring RPMfusion and installing Fedora packages"  --pulsate --auto-close --no-cancel
 	return
 }
 
@@ -219,12 +219,12 @@ tweaks() {
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
 		echo "................" ; sleep 1
 	) | 
-	zenity --progress --title="Configuring Gnome tweaks" --pulsate --auto-close --no-cancel
+	zenity  --progress --title="Configuring Gnome tweaks"  --pulsate --auto-close --no-cancel
 	return
 }
 
 # Install Nvidia Drivers from RPMFusion
-nvida() {
+green() {
 	(
 		echo "" ; sleep 1
 		echo $sudo_password | sudo -S dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
@@ -233,12 +233,13 @@ nvida() {
 		echo "..." ; sleep 1
 		echo $sudo_password | sudo -S dnf install libva-nvidia-driver.{i686,x86_64} -y
 		echo "...." ; sleep 1
-		if ! grep -q "$SEARCH_TEXT" "$FILE"; then
-  			echo "$ADDITIONAL_TEXT" >> "$FILE"
+		EXPANDED_FILE="${FILE/#\~/$HOME}"
+		if ! grep -q "$SEARCH_TEXT" "$EXPANDED_FILE"; then
+			echo "$ADDITIONAL_TEXT" >> "$EXPANDED_FILE"
 		fi
 		echo "....." ; sleep 1
-		) |
-	zenity --progress --title="Installing Nvidia Drivers" --pulsate --auto-close --no-cancel
+	) |
+	zenity  --progress --title="Installing Nvidia Drivers"  --pulsate --auto-close --no-cancel
 	return
 }
 
@@ -258,14 +259,14 @@ amd() {
 		echo "......" ; sleep 1
 		echo $sudo_password | sudo -S dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip 
 	) |
-	zenity --progress --title="Installing AMD Drivers" --pulsate --auto-close --no-cancel
+	zenity  --progress --title="Installing AMD Drivers"  --pulsate --auto-close --no-cancel
 	return
 }
 
 
 # Function to display menu using zenity
 mainmenu() {
-    zenity --forms \
+    zenity --forms  \
         --title="Jeremy's Fedora Setup Script" \
         --text="Please select an option" \
         --add-combo="Option" \
@@ -290,8 +291,8 @@ menu_actions() {
 		"Set system tweaks")
 			tweaks
 			;;
-		"Install Nvidia drivers")
-			nvidia
+		"Install Nvidia Drivers")
+			green
 			;;
 		"Install AMD drivers")
 			amd
