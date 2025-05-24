@@ -60,209 +60,222 @@ uninstall() {
 ## Function to install flatpak applications from Flathub
 flathub() {
 	(
-		echo "." ; sleep 1
+		echo "2" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
-		echo ".." ; sleep 1
+		echo "4" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.inkscape.Inkscape -y 
-		echo "..." ; sleep 1
+		echo "6" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.discordapp.Discord -y 
-		echo "...." ; sleep 1
+		echo "8" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.videolan.VLC -y 
-		echo "....." ; sleep 1
+		echo "10" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.kde.krita -y 
-		echo "......" ; sleep 1
+		echo "12" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.blender.Blender -y 
-		echo "......." ; sleep 1
+		echo "14" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.github.libresprite.LibreSprite -y 
-		echo "........" ; sleep 1
+		echo "16" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.orama_interactive.Pixelorama -y 
-		echo "........." ; sleep 1
+		echo "18" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.tuxpaint.Tuxpaint -y 
-		echo ".........." ; sleep 1
+		echo "20" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.upscayl.Upscayl -y 
-		echo "..........." ; sleep 1
+		echo "22" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.atheme.audacious -y 
-		echo "............" ; sleep 1
-		echo $sudo_password | sudo -S flatpak install --system flathub net.retrodeck.retrodeck -y 
-		echo "............." ; sleep 1
-		echo $sudo_password | sudo -S flatpak install --system flathub org.ryujinx.Ryujinx -y 
-		echo ".............." ; sleep 1
-		echo $sudo_password | sudo -S flatpak install --system flathub org.yuzu_emu.yuzu -y
-		echo "..............."  ; sleep 1
+		echo "24" ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub com.blitterstudio.amiberry -y 
+		echo "26" ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub io.github.ryubing.Ryujinx -y 
+		echo "28" ; sleep 1
+		echo $sudo_password | sudo -S flatpak install --system flathub net.shadps4.shadPS4 -y
+		echo "30"  ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.obsproject.Studio -y
-		echo "................" ; sleep 1
+		echo "32" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub io.github.antimicrox.antimicrox -y
-		echo "................." ; sleep 1
+		echo "34" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.fightcade.Fightcade -y
-		echo ".................." ; sleep 1 
+		echo "36" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub com.mattjakeman.ExtensionManager -y
-		echo "..................." ; sleep 1 
+		echo "38" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub dev.gbstudio.gb-studio -y
-		echo "...................." ; sleep 1 
+		echo "40" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub org.mapeditor.Tiled -y
-		echo "....................." ; sleep 1 
+		echo "42" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub net.lutris.Lutris -y
-		echo "......................" ; sleep 1 
+		echo "44" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub com.heroicgameslauncher.hgl -y
-		echo "......................." ; sleep 1 
+		echo "46" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub com.github.tchx84.Flatseal -y
-		echo "........................" ; sleep 1 
+		echo "48" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub org.kde.kdenlive -y
-		echo "........................." ; sleep 1 
+		echo "50" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub fr.handbrake.ghb -y
-		echo ".........................." ; sleep 1 
+		echo "52" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub org.jdownloader.JDownloader -y
-		echo "..........................." ; sleep 1 
+		echo "54" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub com.github.Matoking.protontricks -y
-		echo "............................" ; sleep 1 
+		echo "56" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub com.transmissionbt.Transmission -y
-		echo "............................." ; sleep 1 
+		echo "58" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub com.vysp3r.ProtonPlus -y
-		echo ".............................." ; sleep 1 
+		echo "60" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub app.xemu.xemu -y
-		echo "..............................." ; sleep 1 
+		echo "65" ; sleep 1 
 		echo $sudo_password | sudo -S flatpak install --system flathub net.pcsx2.PCSX2 -y
-		echo "................................" ; sleep 1
+		echo "70" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub net.kuribo64.melonDS -y
-		echo "................................." ; sleep 1
+		echo "75" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub io.github.lime3ds.Lime3DS -y
-		echo ".................................." ; sleep 1
+		echo "80" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub com.retrodev.blastem -y
-		echo "..................................." ; sleep 1
+		echo "90" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.flycast.Flycast -y
-		echo "...................................." ; sleep 1
+		echo "93" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub org.libretro.RetroArch -y
-		echo "....................................." ; sleep 1
+		echo "95" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub info.cemu.Cemu -y
-		echo "......................................" ; sleep 1
+		echo "98" ; sleep 1
 		echo $sudo_password | sudo -S flatpak install --system flathub net.rpcs3.RPCS3 -y
-		echo "......................................." ; sleep 1
+		echo "100" ; sleep 1
 		echo $sudo_password |
 		sleep 1
 	) | 
-		zenity  --progress --title="Installing Flathub applications"  --pulsate --auto-close --no-cancel
+		zenity  --progress --title="Installing Flathub applications"  --percentage=0 --auto-close --no-cancel
 	return
 }
 
 ## Function to configure RPMfusion and install fedora packages via dnf
 rpmfusion() {
 	(
-		echo "." ; sleep 1
+		echo "10" ; sleep 1
 		echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
-		echo ".." ; sleep 1
+		echo "20" ; sleep 1
 		echo $sudo_password | sudo -S dnf groupupdate @core -y
-		echo "..." ; sleep 1
+		echo "30" ; sleep 1
 		echo $sudo_password | sudo -S dnf config-manager setopt fedora-cisco-openh264.enabled=1
-		echo "...." ; sleep 1
+		echo "40" ; sleep 1
 		echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
-		echo "....." ; sleep 1
+		echo "50" ; sleep 1
 		echo $sudo_password | sudo -S dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y 
-		echo "......" ; sleep 1
+		echo "60" ; sleep 1
 		echo $sudo_password | sudo -S dnf install rpmfusion-free-release-tainted -y 
-		echo "......." ; sleep 1
+		echo "70" ; sleep 1
 		echo $sudo_password | sudo -S dnf install libdvdcss -y 
-		echo "........" ; sleep 1
+		echo "75" ; sleep 1
 		echo $sudo_password | sudo -S dnf install steam wine winetricks gnome-tweaks kernel-modules-extra -y 
-		echo "........." ; sleep 1
+		echo "80" ; sleep 1
 		echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y 
-		echo ".........." ; sleep 1
-		echo "............" ; sleep 1
-		echo "............." ; sleep 1
+		echo "85" ; sleep 1
 		echo $sudo_password | sudo -S dnf install @development-tools -y
-		echo ".............." ; sleep 1
+		echo "90" ; sleep 1
 		echo $sudo_password | sudo -S dnf install make gcc-cpp -y
-		echo "..............." ; sleep 1
+		echo "92" ; sleep 1
 		echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y
-		echo "................" ; sleep 1
-		echo $sudo_password | sudo -S rpm --import https://packages.microsoft.com/keys/microsoft.asc -y
-		echo $sudo_password | sudo -S echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+		echo "94" ; sleep 1
+		echo $sudo_password | sudo -S rpm --import https://packages.microsoft.com/keys/microsoft.asc
+		echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
 		echo $sudo_password | sudo -S dnf install code -y
-		echo "................." ; sleep 1
+		echo "100" ; sleep 1
 	) | 
-		zenity  --progress --title="Configuring RPMfusion and installing Fedora packages"  --pulsate --auto-close --no-cancel
+	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --percentage=0 --auto-close --no-cancel
 	return
 }
 
+## Function to configure system tweaks i like
 tweaks() {
 	(	
-		echo "" ; sleep 1
+		echo "5" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
-		echo "." ; sleep 1
+		echo "10" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
-		echo ".." ; sleep 1
+		echo "15" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
-		echo "..." ; sleep 1
+		echo "20" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utility'
-		echo "...." ; sleep 1
+		echo "25" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
-		echo "....." ; sleep 1
+		echo "30" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
-		echo "......" ; sleep 1
+		echo "35" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate true
-		echo "......." ; sleep 1
+		echo "40" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate true
-		echo "........" ; sleep 1
+		echo "45" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate true
-		echo "........." ; sleep 1
+		echo "50" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate true
-		echo ".........." ; sleep 1
+		echo "55" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate true
-		echo "..........." ; sleep 1
+		echo "60" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
-		echo "............" ; sleep 1
+		echo "65" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
-		echo "............." ; sleep 1
+		echo "70" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
-		echo ".............." ; sleep 1
+		echo "80" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
-		echo "..............." ; sleep 1
+		echo "90" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
-		echo "................" ; sleep 1
+		echo "100" ; sleep 1
 	) | 
-	zenity  --progress --title="Configuring Gnome tweaks"  --pulsate --auto-close --no-cancel
+	zenity  --progress --title="Configuring Gnome tweaks"  --percentage=0 --auto-close --no-cancel
 	return
 }
 
 # Install Nvidia Drivers from RPMFusion
 green() {
 	(
-		echo "" ; sleep 1
+		echo "5" ; sleep 1
 		echo $sudo_password | sudo -S dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
-		echo ".." ; sleep 1
+		echo "25" ; sleep 1
 		echo $sudo_password | sudo -S grubby --update-kernel=ALL --args='video=vesafb:mtrr:3'
-		echo "..." ; sleep 1
+		echo "50" ; sleep 1
 		echo $sudo_password | sudo -S dnf install libva-nvidia-driver.{i686,x86_64} -y
-		echo "...." ; sleep 1
+		echo "75" ; sleep 1
 		EXPANDED_FILE="${FILE/#\~/$HOME}"
 		if ! grep -q "$SEARCH_TEXT" "$EXPANDED_FILE"; then
 			echo "$ADDITIONAL_TEXT" >> "$EXPANDED_FILE"
 		fi
-		echo "....." ; sleep 1
+		echo "100" ; sleep 1
 	) |
-	zenity  --progress --title="Installing Nvidia Drivers"  --pulsate --auto-close --no-cancel
+	zenity  --progress --title="Install Nvidia GPU Drivers"  --percentage=0 --auto-close --no-cancel
 	return
 }
 
 # Install AMD Drivers
-amd() {
+red() {
 	(
-		echo "" ; sleep 1
+		echo "5" ; sleep 1
 		echo $sudo_password | sudo -S dnf install mesa-vulkan-drivers vulkan mesa-libGL mesa-libEGL -y
-		echo ".." ; sleep 1
+		echo "20" ; sleep 1
 		echo $sudo_password | sudo -S dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
-		echo "..." ; sleep 1
+		echo "40" ; sleep 1
 		echo $sudo_password | sudo -S dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
-		echo "...." ; sleep 1
+		echo "60" ; sleep 1
 		echo $sudo_password | sudo -S dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
-		echo "....." ; sleep 1
+		echo "80" ; sleep 1
 		echo $sudo_password | sudo -S dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
-		echo "......" ; sleep 1
-		echo $sudo_password | sudo -S dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip 
+		echo "90" ; sleep 1
+		echo $sudo_password | sudo -S dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip -y
+		echo "100" ; sleep 1
 	) |
-	zenity  --progress --title="Installing AMD Drivers"  --pulsate --auto-close --no-cancel
+	zenity  --progress --title="Install AMD GPU Drivers"  --percentage=0 --auto-close --no-cancel
 	return
 }
 
+blue()  {
+    (
+        echo "5" ; sleep 1
+		echo $sudo_password | sudo -S dnf install xorg-x11-drv-intel -y
+		echo "33" ; sleep 1
+		echo $sudo_password | sudo -S dnf install intel-media-driver -y
+		echo "66" ; sleep 1
+        echo "Finished setting up Intel GPU."
+        echo "100" ; sleep 1
+	)|
+	zenity --progress --title="Install Intel GPU Drivers" --percentage=0 --auto-close --no-cancel
+	return
+}
 
 # Function to display menu using zenity
 mainmenu() {
@@ -270,7 +283,7 @@ mainmenu() {
         --title="Jeremy's Fedora Setup Script" \
         --text="Please select an option" \
         --add-combo="Option" \
-        --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Install Nvidia Drivers|Install AMD Drivers|Install Intel Drivers|Exit"
+        --combo-values="Update this Fedora Install|Uninstall unwanted applications|Setup RPMfusion and install Fedora applications|Install Flathub applications|Set system tweaks|Install Nvidia GPU Drivers|Install AMD GPU Drivers|Install Intel GPU Drivers|Exit"
 }
 
 ## Function to perform actions based on menu selection
@@ -291,14 +304,14 @@ menu_actions() {
 		"Set system tweaks")
 			tweaks
 			;;
-		"Install Nvidia Drivers")
+		"Install Nvidia GPU Drivers")
 			green
 			;;
-		"Install AMD drivers")
-			amd
+		"Install AMD GPU Drivers")
+			red
 			;;
-		"Install Intel drivers")
-			intel
+		"Install Intel GPU Drivers")
+			blue
 			;;			
 		"Exit")
 			exit 0
