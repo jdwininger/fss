@@ -267,11 +267,9 @@ blue()  {
     (
         echo "5" ; sleep 1
 		echo $sudo_password | sudo -S dnf install xorg-x11-drv-intel -y
-		echo "33" ; sleep 1
+		echo "50" ; sleep 1
 		echo $sudo_password | sudo -S dnf install intel-media-driver -y
-		echo "66" ; sleep 1
-        echo "Finished setting up Intel GPU."
-        echo "100" ; sleep 1
+		echo "100" ; sleep 1
 	)|
 	zenity --progress --title="Install Intel GPU Drivers" --percentage=0 --auto-close --no-cancel
 	return
