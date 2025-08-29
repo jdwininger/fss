@@ -156,7 +156,7 @@ rpmfusion() {
 		echo "30" ; sleep 1
 		echo $sudo_password | sudo -S dnf config-manager setopt fedora-cisco-openh264.enabled=1
 		echo "40" ; sleep 1
-		echo $sudo_password | ssudo dnf swap ffmpeg-free ffmpeg --allowerasing -y 
+		echo $sudo_password | sudo dnf swap ffmpeg-free ffmpeg --allowerasing -y 
 		echo "50" ; sleep 1
 		echo $sudo_password | sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
 		echo "60" ; sleep 1
