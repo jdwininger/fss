@@ -7,8 +7,10 @@ FILE="~/.bash_profile"
 SEARCH_TEXT="export GDK_GL=gles"
 ADDITIONAL_TEXT="export GDK_GL=gles"
 
-## Welcome messsage
-zenity  --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
+## Install zenity if it's not already
+if ! rpm -q zenity >/dev/null 2>&1; then
+	echo $sudo_password | sudo -S dnf install zenity -y
+fi
 
 ## Ask for the sudo password
 sudo_password=""
@@ -22,8 +24,8 @@ else
     zenity  --error --text="Authentication failed"
 fi
 
-## Install zenity if it's not already
-echo $password | sudo -S dnf install zenity
+## Welcome messsage
+zenity  --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue"
 
 ## function to reboot the system or return to the main menu
 reboot_or_return() {
@@ -150,13 +152,13 @@ rpmfusion() {
 		echo "10" ; sleep 1
 		echo $sudo_password | sudo -S dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y 
 		echo "20" ; sleep 1
-		echo $sudo_password | sudo -S dnf groupupdate @core -y
+		echo $sudo_password | sudo -S dnf update @core -y
 		echo "30" ; sleep 1
 		echo $sudo_password | sudo -S dnf config-manager setopt fedora-cisco-openh264.enabled=1
 		echo "40" ; sleep 1
-		echo $sudo_password | sudo -S dnf swap ffmpeg-free ffmpeg --allowerasing -y 
+		echo $sudo_password | ssudo dnf swap ffmpeg-free ffmpeg --allowerasing -y 
 		echo "50" ; sleep 1
-		echo $sudo_password | sudo -S dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y 
+		echo $sudo_password | sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
 		echo "60" ; sleep 1
 		echo $sudo_password | sudo -S dnf install rpmfusion-free-release-tainted -y 
 		echo "70" ; sleep 1
@@ -168,7 +170,7 @@ rpmfusion() {
 		echo "85" ; sleep 1
 		echo $sudo_password | sudo -S dnf install @development-tools -y
 		echo "90" ; sleep 1
-		echo $sudo_password | sudo -S dnf install make gcc-cpp -y
+		echo $sudo_password | sudo -S dnf install make gcc-c++ -y
 		echo "92" ; sleep 1
 		echo $sudo_password | sudo -S dnf install fedora-workstation-repositories -y
 		echo "94" ; sleep 1
@@ -227,9 +229,7 @@ green() {
 	(
 		echo "5" ; sleep 1
 		echo $sudo_password | sudo -S dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
-		echo "25" ; sleep 1
-		echo $sudo_password | sudo -S grubby --update-kernel=ALL --args='video=vesafb:mtrr:3'
-		echo "50" ; sleep 1
+		echo "37" ; sleep 1
 		echo $sudo_password | sudo -S dnf install libva-nvidia-driver.{i686,x86_64} -y
 		echo "75" ; sleep 1
 		EXPANDED_FILE="${FILE/#\~/$HOME}"
