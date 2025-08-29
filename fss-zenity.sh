@@ -228,9 +228,7 @@ tweaks() {
 green() {
 	(
 		echo "5" ; sleep 1
-		echo $sudo_password | sudo -S dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
-		echo "37" ; sleep 1
-		echo $sudo_password | sudo -S dnf install libva-nvidia-driver.{i686,x86_64} -y
+		echo $sudo_password | sudo -S dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo libva-nvidia-driver -y
 		echo "75" ; sleep 1
 		EXPANDED_FILE="${FILE/#\~/$HOME}"
 		if ! grep -q "$SEARCH_TEXT" "$EXPANDED_FILE"; then
