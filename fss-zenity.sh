@@ -189,7 +189,7 @@ tweaks() {
 		echo "5" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
 		echo "10" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Multimedia'
 		echo "15" ; sleep 1
 		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
 		echo "20" ; sleep 1
@@ -228,7 +228,7 @@ tweaks() {
 green() {
 	(
 		echo "5" ; sleep 1
-		echo $sudo_password | sudo -S dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo libva-nvidia-driver -y
+		echo $sudo_password | sudo -S dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 libva-utils vdpauinfo libva-nvidia-driver -y
 		echo "75" ; sleep 1
 		EXPANDED_FILE="${FILE/#\~/$HOME}"
 		if ! grep -q "$SEARCH_TEXT" "$EXPANDED_FILE"; then
