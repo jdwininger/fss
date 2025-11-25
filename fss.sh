@@ -58,18 +58,18 @@ flathub() {
 		"--system flathub org.videolan.VLC"
 		"--system flathub org.kde.krita"
 		"--system flathub org.blender.Blender"
-		"--system flathub com.github.libresprite.LibreSprite"
-		"--system flathub com.orama_interactive.Pixelorama"
+#		"--system flathub com.github.libresprite.LibreSprite"
+#		"--system flathub com.orama_interactive.Pixelorama"
 		"--system flathub org.tuxpaint.Tuxpaint"
 		"--system flathub org.upscayl.Upscayl"
 		"--system flathub org.atheme.audacious"
-		"--system flathub org.yuzu_emu.yuzu"
+#		"--system flathub org.yuzu_emu.yuzu"
 		"--system flathub com.obsproject.Studio"
 		"--system flathub io.github.antimicrox.antimicrox"
 		"--system flathub com.fightcade.Fightcade"
 		"--system flathub com.mattjakeman.ExtensionManager"
-		"--system flathub dev.gbstudio.gb-studio"
-		"--system flathub org.mapeditor.Tiled"
+#		"--system flathub dev.gbstudio.gb-studio"
+#		"--system flathub org.mapeditor.Tiled"
 		"--system flathub net.lutris.Lutris"
 		"--system flathub com.heroicgameslauncher.hgl"
 		"--system flathub com.github.tchx84.Flatseal"
@@ -115,13 +115,12 @@ rpmfusion() {
 	run_sudo dnf update @core -y
 	run_sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 	run_sudo dnf swap ffmpeg-free ffmpeg --allowerasing -y
-	run_sudo dnf groupupdate multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
-	run_sudo dnf groupupdate sound-and-video -y
+#	run_sudo dnf groupupdate sound-and-video -y
 	run_sudo dnf install rpmfusion-free-release-tainted -y
 	run_sudo dnf install libdvdcss -y
 	run_sudo dnf install steam wine winetricks gnome-tweaks kernel-modules-extra -y
 	run_sudo dnf group install development-tools -y
-	run_sudo dnf install make gcc-cpp -y
+	run_sudo dnf install make gcc-c++ -y
 	run_sudo dnf install fedora-workstation-repositories -y
 	# run_sudo dnf config-manager --set-enabled google-chrome 
 	# run_sudo dnf install google-chrome-stable -y
@@ -145,39 +144,39 @@ rpmfusion() {
 	mainmenu
 }
 
-tweaks() {
-	clear
-	echo ""
-	gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
-	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utility'
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate true
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate true
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate true
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate true
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate true
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
-	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
-	clear
-	echo "Finished tweaking Gnome."
-	echo ""
-	read -r -n 1 -s -p 'Press any key to return to the main menu'
-	clear
-	mainmenu
-}
+#tweaks() {
+#	clear
+#	echo ""
+#	gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+#	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utility'
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate true
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate true
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate true
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate true
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate true
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
+#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
+#	clear
+#	echo "Finished tweaking Gnome."
+#	echo ""
+#	read -r -n 1 -s -p 'Press any key to return to the main menu'
+#	clear
+#	mainmenu
+#}
 
 nvidia()  {
 	clear
 	echo ""
 	echo "Make sure you have ran menu option 1 before installing these Nvidia drivers."
-	run_sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 nvidia-vaapi-driver libva-utils vdpauinfo -y
+	run_sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 libva-utils vdpauinfo -y
 	run_sudo grubby --update-kernel=ALL --args='video=vesafb:mtrr:3'
 	run_sudo dnf install libva-nvidia-driver.{i686,x86_64} -y
 	if ! grep -q "$SEARCH_TEXT" "$FILE"; then
@@ -223,7 +222,7 @@ mainmenu() {
 	echo "Press 2 to uninstall unused applications"
 	echo "Press 3 to setup RPMfusion and install Fedora applications"
 	echo "Press 4 to install Flathub applications"
-	echo "Press 5 to set system tweaks"
+#	echo "Press 5 to set system tweaks"
 	echo "Press n to install Nvidia driver for media and CUDA"
 	echo "Press a to setup AMD GPU for ROCm, VDPU and VAAPI"
 	echo "Press i to setup Intel GPU Hardware Acceleration"
@@ -234,7 +233,7 @@ mainmenu() {
 		2)  uninstall ;;
 		3)  rpmfusion ;;
 		4)  flathub ;;
-		5)  tweaks ;;
+#		5)  tweaks ;;
 		a|A)  amd ;;
 		i|I)  intel ;;
 		n|N)  nvidia ;;

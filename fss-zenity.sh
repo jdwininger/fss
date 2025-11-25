@@ -104,20 +104,20 @@ flathub() {
 		"--system flathub org.videolan.VLC"
 		"--system flathub org.kde.krita"
 		"--system flathub org.blender.Blender"
-		"--system flathub com.github.libresprite.LibreSprite"
-		"--system flathub com.orama_interactive.Pixelorama"
+#		"--system flathub com.github.libresprite.LibreSprite"
+#		"--system flathub com.orama_interactive.Pixelorama"
 		"--system flathub org.tuxpaint.Tuxpaint"
 		"--system flathub org.upscayl.Upscayl"
 		"--system flathub org.atheme.audacious"
-		"--system flathub com.blitterstudio.amiberry"
+#		"--system flathub com.blitterstudio.amiberry"
 		"--system flathub io.github.ryubing.Ryujinx"
 		"--system flathub net.shadps4.shadPS4"
 		"--system flathub com.obsproject.Studio"
 		"--system flathub io.github.antimicrox.antimicrox"
 		"--system flathub com.fightcade.Fightcade"
 		"--system flathub com.mattjakeman.ExtensionManager"
-		"--system flathub dev.gbstudio.gb-studio"
-		"--system flathub org.mapeditor.Tiled"
+#		"--system flathub dev.gbstudio.gb-studio"
+#		"--system flathub org.mapeditor.Tiled"
 		"--system flathub net.lutris.Lutris"
 		"--system flathub com.heroicgameslauncher.hgl"
 		"--system flathub com.github.tchx84.Flatseal"
@@ -201,51 +201,51 @@ rpmfusion() {
 }
 
 ## Function to configure system tweaks i like
-tweaks() {
-	(	
-		echo "5" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
-		echo "10" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Multimedia'
-		echo "15" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
-		echo "20" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utility'
-		echo "25" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
-		echo "30" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
-		echo "35" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate true
-		echo "40" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate true
-		echo "45" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate true
-		echo "50" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate true
-		echo "55" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate true
-		echo "60" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
-		echo "65" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
-		echo "70" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
-		echo "80" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
-		echo "90" ; sleep 1
-		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
-		echo "100" ; sleep 1
-	) | 
-	zenity  --progress --title="Configuring Gnome tweaks"  --percentage=0 --auto-close --no-cancel --window-icon="$ICON_PATH"
-	return
-}
+#tweaks() {
+#	(	
+#		echo "5" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
+#		echo "10" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Multimedia'
+#		echo "15" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
+#		echo "20" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utility'
+#		echo "25" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
+#		echo "30" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
+#		echo "35" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate true
+#		echo "40" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate true
+#		echo "45" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate true
+#		echo "50" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate true
+#		echo "55" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate true
+#		echo "60" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
+#		echo "65" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
+#		echo "70" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
+#		echo "80" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
+#		echo "90" ; sleep 1
+#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
+#		echo "100" ; sleep 1
+#	) | 
+#	zenity  --progress --title="Configuring Gnome tweaks"  --percentage=0 --auto-close --no-cancel --window-icon="$ICON_PATH"
+#	return
+#}
 
 # Install Nvidia Drivers from RPMFusion
 green() {
 	(
 		echo "5" ; sleep 1
-		run_sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 libva-utils vdpauinfo libva-nvidia-driver -y
+		run_sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda vulkan xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-libs.i686 libva-utils vdpauinfo libva-nvidia-driver.{i686,x86_64} -y
 		echo "75" ; sleep 1
 		EXPANDED_FILE="$FILE"
 		if ! grep -q "$SEARCH_TEXT" "$EXPANDED_FILE"; then
@@ -303,7 +303,7 @@ mainmenu() {
         "Uninstall unwanted applications" \
         "Setup RPMfusion and install Fedora applications" \
         "Install Flathub applications" \
-        "Set system tweaks" \
+#        "Set system tweaks" \
         "Install Nvidia GPU Drivers" \
         "Install AMD GPU Drivers" \
         "Install Intel GPU Drivers" \
@@ -326,9 +326,9 @@ menu_actions() {
 		"Install Flathub applications")
 			flathub
 			;;
-		"Set system tweaks")
-			tweaks
-			;;
+#		"Set system tweaks")
+#			tweaks
+#			;;
 		"Install Nvidia GPU Drivers")
 			green
 			;;
