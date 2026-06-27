@@ -22,7 +22,7 @@ fi
 ## Ask for the sudo password (use zenity if available, otherwise fallback to terminal)
 sudo_password=""
 if command -v zenity >/dev/null 2>&1; then
-	sudo_password=$(zenity --password --title="Authentication Required" --window-icon="$ICON_PATH") || { zenity --error --text="Authentication failed" --window-icon="$ICON_PATH"; exit 1; }
+	sudo_password=$(zenity --password --title="Authentication Required" --icon=applications-system) || { zenity --error --text="Authentication failed" --icon=dialog-error; exit 1; }
 else
 	read -r -s -p "Sudo password: " sudo_password
 	echo
@@ -31,7 +31,7 @@ fi
 # Validate sudo credentials and cache them for this session
 if ! printf '%s\n' "$sudo_password" | sudo -S -v >/dev/null 2>&1; then
 	if command -v zenity >/dev/null 2>&1; then
-		zenity --error --text="Authentication failed" --window-icon="$ICON_PATH"
+		zenity --error --text="Authentication failed" --icon=dialog-error
 	else
 		echo "Authentication failed" >&2
 	fi
@@ -63,24 +63,26 @@ if [ "$need_zenity_install" = true ]; then
 fi
 
 ## Welcome messsage
-zenity  --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue" --window-icon="$ICON_PATH"
+zenity  --info --title="Welcome to Jeremy's Fedora Setup Script" --width="600" --height="300" --text="Welcome to Jeremy's Fedora Setup script.This script will uninstall, install, configure and tweak your Fedora install until it resembles my desktop. You'll be asked for your user password to continue." --ok-label="Continue" --icon=applications-system
 
 ## function to reboot the system or return to the main menu
 reboot_or_return() {
-        zenity  --question --title="Reboot System or Return to Main Menu" --text="Some updated packages, such as the Linux kernel, need a reboot to activate. If you decide to reboot you'll need to rerun this script and skip the update option. Would you like to reboot your system now or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu" --window-icon="$ICON_PATH"
+		zenity  --question --title="Reboot System or Return to Main Menu" --text="Some updated packages, such as the Linux kernel, need a reboot to activate. If you decide to reboot you'll need to rerun this script and skip the update option. Would you like to reboot your system now or return to the main menu?" --ok-label="Reboot" --cancel-label="Return to Main Menu" --icon=dialog-question
     if [ $? -eq 0 ]; then
         run_sudo reboot
     else
         return
-    fi
-}## Function to update fedora packages via dnf and call return_or_reboot
+	fi
+}
+
+## Function to update fedora packages via dnf and call return_or_reboot
 updates() {
 	(
 		sleep 1
 		run_sudo dnf upgrade -y
 		sleep 1
 	) | 
-	zenity  --progress --title="Updating your Fedora system"  --pulsate --auto-close --no-cancel --window-icon="$ICON_PATH"	
+	zenity  --progress --title="Updating your Fedora system"  --pulsate --auto-close --no-cancel --icon=applications-system	
 	reboot_or_return
 }
 
@@ -91,7 +93,7 @@ uninstall() {
 		run_sudo dnf remove libreoffice* rhythmbox gnome-abrt mediawriter -y
 		sleep 1
 	) | 
-	zenity  --progress --title="Uninstalling unwanted Fedora packages"  --pulsate --auto-close --no-cancel --window-icon="$ICON_PATH"
+	zenity  --progress --title="Uninstalling unwanted Fedora packages"  --pulsate --auto-close --no-cancel --icon=applications-system
 	return
 }
 
@@ -150,7 +152,7 @@ flathub() {
 			sleep 1
 		done
 	) |
-	zenity --progress --title="Installing Flathub applications" --percentage=0 --auto-close --no-cancel --window-icon="$ICON_PATH"
+	zenity --progress --title="Installing Flathub applications" --percentage=0 --auto-close --no-cancel --icon=applications-system
 	return
 }
 
@@ -196,50 +198,52 @@ rpmfusion() {
 		run_sudo dnf install code -y
 		echo "100" ; sleep 1
 	) | 
-	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --percentage=0 --auto-close --no-cancel --window-icon="$ICON_PATH"
+	zenity --progress --title="Configuring RPMfusion and installing Fedora packages" --percentage=0 --auto-close --no-cancel --icon=applications-system
 	return
 }
 
-## Function to configure system tweaks i like
-#tweaks() {
-#	(	
-#		echo "5" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
-#		echo "10" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Multimedia'
-#		echo "15" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
-#		echo "20" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utility'
-#		echo "25" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
-#		echo "30" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
-#		echo "35" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate true
-#		echo "40" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate true
-#		echo "45" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate true
-#		echo "50" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate true
-#		echo "55" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate true
-#		echo "60" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
-#		echo "65" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
-#		echo "70" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
-#		echo "80" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
-#		echo "90" ; sleep 1
-#		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
-#		echo "100" ; sleep 1
-#	) | 
-#	zenity  --progress --title="Configuring Gnome tweaks"  --percentage=0 --auto-close --no-cancel --window-icon="$ICON_PATH"
-#	return
-#}
+tweaks() {
+	(	
+		echo "5" ; sleep 1
+		gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+		echo "10" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
+		echo "20" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Multimedia'
+		echo "30" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
+		echo "40" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utilities'
+		echo "50" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
+		echo "60" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
+		echo "65" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate false
+		echo "70" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate false
+		echo "75" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate false
+		echo "80" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate false
+		echo "85" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate false
+		echo "90" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
+		echo "92" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
+		echo "94" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
+		echo "96" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
+		echo "98" ; sleep 1
+		gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
+		echo "100" ; sleep 1
+	) | 
+	zenity  --progress --title="Configuring Gnome tweaks"  --percentage=0 --auto-close --no-cancel --icon=applications-system
+	zenity --info --title="Relog Required" --width=500 --text="Gnome tweaks are complete. You must log out and log back in for these changes to take effect." --ok-label="Return to Main Menu" --icon=dialog-information
+	return
+}
 
 # Install Nvidia Drivers from RPMFusion
 green() {
@@ -253,7 +257,7 @@ green() {
 		fi
 		echo "100" ; sleep 1
 	) |
-	zenity  --progress --title="Install Nvidia GPU Drivers"  --percentage=0 --auto-close --no-cancel --window-icon="$ICON_PATH"
+	zenity  --progress --title="Install Nvidia GPU Drivers"  --percentage=0 --auto-close --no-cancel --icon=applications-system
 	return
 }
 
@@ -261,20 +265,13 @@ green() {
 red() {
 	(
 		echo "5" ; sleep 1
-		run_sudo dnf install mesa-vulkan-drivers vulkan mesa-libGL mesa-libEGL -y
+		run_sudo dnf install mesa-vulkan-drivers-freeworld.{i686,x86_64} mesa-va-drivers-freeworld.{i686,x86_64} --allowerasing -y
 		echo "20" ; sleep 1
-		run_sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
-		echo "40" ; sleep 1
-		run_sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
-		echo "60" ; sleep 1
-		run_sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
-		echo "80" ; sleep 1
-		run_sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
-		echo "90" ; sleep 1
+		echo "50" ; sleep 1
 		run_sudo dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip -y
 		echo "100" ; sleep 1
 	) |
-	zenity  --progress --title="Install AMD GPU Drivers"  --percentage=0 --auto-close --no-cancel --window-icon="$ICON_PATH"
+	zenity  --progress --title="Install AMD GPU Drivers"  --percentage=0 --auto-close --no-cancel --icon=applications-system
 	return
 }
 
@@ -286,7 +283,7 @@ blue()  {
 		run_sudo dnf install intel-media-driver -y
 		echo "100" ; sleep 1
 	)|
-	zenity --progress --title="Install Intel GPU Drivers" --percentage=0 --auto-close --no-cancel --window-icon="$ICON_PATH"
+	zenity --progress --title="Install Intel GPU Drivers" --percentage=0 --auto-close --no-cancel --icon=applications-system
 	return
 }
 
@@ -295,15 +292,15 @@ mainmenu() {
     local selection
     selection=$(zenity --list \
         --title="Jeremy's Fedora Setup Script" \
-        --window-icon="$ICON_PATH" \
+		--icon=applications-system \
         --column="Select an option" \
         --width=600 --height=400 \
-        --no-headers \
+	    --hide-header \
         "Update this Fedora Install" \
         "Uninstall unwanted applications" \
         "Setup RPMfusion and install Fedora applications" \
         "Install Flathub applications" \
-#        "Set system tweaks" \
+		"Set system tweaks" \
         "Install Nvidia GPU Drivers" \
         "Install AMD GPU Drivers" \
         "Install Intel GPU Drivers" \
@@ -326,9 +323,9 @@ menu_actions() {
 		"Install Flathub applications")
 			flathub
 			;;
-#		"Set system tweaks")
-#			tweaks
-#			;;
+		"Set system tweaks")
+			tweaks
+			;;
 		"Install Nvidia GPU Drivers")
 			green
 			;;

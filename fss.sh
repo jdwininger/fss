@@ -52,7 +52,7 @@ flathub() {
 	echo ""
 
 	packages=(
-		"https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref"
+#		"https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref"
 		"--system flathub org.inkscape.Inkscape"
 		"--system flathub com.discordapp.Discord"
 		"--system flathub org.videolan.VLC"
@@ -144,33 +144,35 @@ rpmfusion() {
 	mainmenu
 }
 
-#tweaks() {
-#	clear
-#	echo ""
-#	gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
-#	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Artsy Stuff'
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utility'
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate true
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate true
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate true
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate true
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate true
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
-#	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
-#	clear
-#	echo "Finished tweaking Gnome."
-#	echo ""
-#	read -r -n 1 -s -p 'Press any key to return to the main menu'
-#	clear
-#	mainmenu
-#}
+## Function to configure system tweaks i like
+tweaks() {
+	clear
+	echo ""
+	gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+	gsettings set org.gnome.desktop.app-folders folder-children "['Graphics', 'Game', 'Utility', 'Development', 'Network']"
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ name 'Multimedia'
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ name 'Games'
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ name 'Utilities'
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ name 'Development'
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ name 'Internet'
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ translate false
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ translate false
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ translate false
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ translate false
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ translate false
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Graphics/ categories "['Graphics', 'Video', 'AudioVideo']"
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Game/ categories "['Game']"
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utility/ categories "['Utility', 'X-GNOME-Utilities']"
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Development/ categories "['Development']"
+	gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Network/ categories "['Network']"
+	clear
+	echo "Finished tweaking Gnome."
+	echo "You must log out and log back in for these tweaks to take effect."
+	echo ""
+	read -r -p 'Press Enter to return to the main menu'
+	clear
+	mainmenu
+}
 
 nvidia()  {
 	clear
@@ -192,10 +194,7 @@ nvidia()  {
 amd()  {
 	clear
 	echo ""
-	run_sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
-	run_sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
-	run_sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
-	run_sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
+	run_sudo dnf install mesa-vulkan-drivers-freeworld.{i686,x86_64} mesa-va-drivers-freeworld.{i686,x86_64} --allowerasing -y
 	run_sudo dnf install rocminfo rocm-opencl rocm-clinfo rocm-hip -y
 	echo "Finished setting up AMD GPU."
 	echo ""
@@ -222,9 +221,9 @@ mainmenu() {
 	echo "Press 2 to uninstall unused applications"
 	echo "Press 3 to setup RPMfusion and install Fedora applications"
 	echo "Press 4 to install Flathub applications"
-#	echo "Press 5 to set system tweaks"
+	echo "Press 5 to set system tweaks"
 	echo "Press n to install Nvidia driver for media and CUDA"
-	echo "Press a to setup AMD GPU for ROCm, VDPU and VAAPI"
+	echo "Press a to setup AMD GPU for ROCm, VDPAU and VAAPI"
 	echo "Press i to setup Intel GPU Hardware Acceleration"
 	echo "Press x to exit the script"
 	read -r -n 1 -p "Input Selection:" mainmenuinput
@@ -233,7 +232,7 @@ mainmenu() {
 		2)  uninstall ;;
 		3)  rpmfusion ;;
 		4)  flathub ;;
-#		5)  tweaks ;;
+		5)  tweaks ;;
 		a|A)  amd ;;
 		i|I)  intel ;;
 		n|N)  nvidia ;;
