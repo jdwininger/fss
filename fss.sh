@@ -25,6 +25,18 @@ run_sudo() {
 	fi
 }
 
+configure_flatpak_xdg_dirs() {
+	cat <<'EOF' | run_sudo tee /etc/profile.d/flatpak-xdg.sh > /dev/null
+# Added by fss.sh so system Flatpak apps are discoverable
+if [ -d /var/lib/flatpak/exports/share ]; then
+  case ":${XDG_DATA_DIRS:-}:" in
+    *:/var/lib/flatpak/exports/share:*) ;;
+    *) export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}" ;;
+  esac
+fi
+EOF
+}
+
 updates() {
 	clear
 	echo ""
@@ -99,6 +111,8 @@ flathub() {
 		# Use bash -c so multi-word package strings are parsed as separate args
 		run_sudo bash -c "flatpak install -y ${packages[i]}"
 	done
+
+	configure_flatpak_xdg_dirs
 
 	clear
 	echo "Finished installing Flathub applications. You'll need to log out and back in to see applications in gnome applications list."

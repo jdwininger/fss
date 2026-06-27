@@ -57,6 +57,18 @@ run_sudo() {
 	fi
 }
 
+configure_flatpak_xdg_dirs() {
+	cat <<'EOF' | run_sudo tee /etc/profile.d/flatpak-xdg.sh > /dev/null
+# Added by fss-zenity.sh so system Flatpak apps are discoverable
+if [ -d /var/lib/flatpak/exports/share ]; then
+	case ":${XDG_DATA_DIRS:-}:" in
+		*:/var/lib/flatpak/exports/share:*) ;;
+		*) export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}" ;;
+	esac
+fi
+EOF
+}
+
 # If zenity was missing when we started, install it now (we have validated sudo)
 if [ "$need_zenity_install" = true ]; then
     run_sudo dnf install -y zenity
@@ -151,6 +163,7 @@ flathub() {
 			run_sudo bash -c "flatpak install -y ${packages[i]}"
 			sleep 1
 		done
+		configure_flatpak_xdg_dirs
 	) |
 	zenity --progress --title="Installing Flathub applications" --percentage=0 --auto-close --no-cancel --icon=applications-system
 	return
