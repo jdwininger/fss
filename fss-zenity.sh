@@ -100,7 +100,7 @@ uninstall() {
 ## Function to install flatpak applications from Flathub
 flathub() {
 	packages=(
-		"https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref"
+		"--system flathub org.gimp.GIMP"
 		"--system flathub org.inkscape.Inkscape"
 		"--system flathub com.discordapp.Discord"
 		"--system flathub org.videolan.VLC"
